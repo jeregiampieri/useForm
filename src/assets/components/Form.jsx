@@ -9,6 +9,9 @@ export const Form = () => {
     // Esto es una buena práctica para no tener toda la lógica mezclada con el formulario
     const submit = handleSubmit((data) => {
             alert("Formulario enviado")
+            // Estoy manipulando los datos antes de enviarlos
+            data.nombre = data.nombre.trim()
+            data.email = data.email.trim()
         })
     
     const esMayorEdad = (fechaNacimiento, actual) =>{
