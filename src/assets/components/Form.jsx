@@ -4,14 +4,15 @@ import {useForm} from "react-hook-form"
 export const Form = () => {
 
     // Recordar que acá voy a colocar la lógica del componente (en este caso, el componente es el formulario)
-    const {register, handleSubmit, formState: {errors}, watch} = useForm()
-    console.log("errores")
+    const {register, handleSubmit, formState: {errors}, watch, reset} = useForm()
     // Esto es una buena práctica para no tener toda la lógica mezclada con el formulario
     const submit = handleSubmit((data) => {
             alert("Formulario enviado")
             // Estoy manipulando los datos antes de enviarlos
             data.nombre = data.nombre.trim()
             data.email = data.email.trim()
+            // Reseteo los valores del formulario luego de que se enviara
+            reset()
         })
     
     const esMayorEdad = (fechaNacimiento, actual) =>{
@@ -25,6 +26,7 @@ export const Form = () => {
     // handleSubmit sirve para poder manejar el envío del formulario, es decir, cuando el usuario le hace click al botón enviar
     // formState es un objeto que proporciona useForm, al ser un OBJETO y no una función, tengo que desestructurarlo y tomar las propiedades que me sirven (en este caso tomo errors que a su vez es un objeto)
     // watch es un OBJETO que va manteniendo los valores de todos los inputs en tiempo real
+    // reset me permite resetar los valores de todos los inputs
     return (
         // La propiedad onSubmit es como un 'evento' disparador cuando se envía el formulario, y dispara el handleSubmit (manejador del envío)
         <FormStyled onSubmit={submit}>    
